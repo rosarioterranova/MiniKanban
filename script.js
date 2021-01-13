@@ -17,8 +17,11 @@ let tasks = {
     inprogress: [],
     done: []
 }
-
 let listToAdd = ""
+let draggedItem = ""
+let draggedItemTitle = ""
+let currentListDrop = ""
+let listIndexTarget = ""
 
 //---- On Click Events
 
@@ -50,7 +53,7 @@ const addItem = () =>{
 
 const createTask = (list, title=modalTitle.value, description=modalDescription.value) => {
     list.innerHTML += `
-    <div class="border p-2 mb-2 task">
+    <div class="border p-2 mb-2 task" draggable="true" ondragstart="drag(event)">
         <div class="d-flex my-2">
             <p class="task-title"><b>${title}</b></p>
             <button class="ml-auto remove-btn" onclick="removeTask('${title}')">-</button>
@@ -101,6 +104,52 @@ const removeTask = (title) =>{
             }
         }
     }
+    updateVisuals()
+    saveData()
+}
+
+//---- Drag and Drop Events
+
+const drag = event =>{
+    draggedItem = event.target.outerHTML
+    draggedItemTitle = event.target.querySelector(".task-title").textContent
+}
+
+const allowDrop = e =>{
+    e.preventDefault();
+}
+
+const dragEnter = listIndex =>{
+    lists[listIndex].classList.add("over")
+    currentListDrop = lists[listIndex]
+    listIndexTarget = listIndex
+}
+
+const drop = e =>{
+    e.preventDefault();
+
+    //Remove drop effect
+    lists.forEach(list => list.classList.remove("over"))
+
+    //Add task to column
+    currentListDrop.innerHTML = draggedItem
+    draggedItem.innerHTML=""
+
+    //Move tasks to data structure
+    for (const taskList of Object.values(tasks)) {
+        for (const task of taskList) {
+            if(task.title == draggedItemTitle){
+                taskList.splice(taskList.indexOf(task),1)
+                switch(listIndexTarget){
+                    case 0: tasks.backlog.push(task); break;
+                    case 1: tasks.todo.push(task); break;
+                    case 2: tasks.inprogress.push(task); break;
+                    case 3: tasks.done.push(task); break;
+                }
+            }
+        }
+    }
+
     updateVisuals()
     saveData()
 }

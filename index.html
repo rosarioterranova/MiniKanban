@@ -21,7 +21,7 @@
                 <!-- List -->
                 <div class="p-1 border list my-1">
                     <p class="text-center task-title list-title">Backlog</p>
-                    <div class="p-1 custom-scroll">
+                    <div class="p-1 custom-scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(0)">
                         <!-- Task -->
                     </div>
                     <button class="btn add-item-btn" data-toggle="modal" data-target="#addItemModal"  onclick="setListToAdd('backlog')">+ Add item</button>
@@ -33,7 +33,7 @@
                 <!-- List -->
                 <div class="p-1 border list my-1">
                     <p class="text-center task-title list-title">To Do</p>
-                    <div class="p-1 custom-scroll">
+                    <div class="p-1 custom-scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(1)">
                         <!-- Task -->
                     </div>
                     <button class="btn add-item-btn" data-toggle="modal" data-target="#addItemModal"  onclick="setListToAdd('todo')">+ Add item</button>
@@ -45,7 +45,7 @@
                 <!-- List -->
                 <div class="p-1 border list my-1">
                     <p class="text-center task-title list-title">In progress</p>
-                    <div class="p-1 custom-scroll">
+                    <div class="p-1 custom-scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(2)">
                         <!-- Task -->
                     </div>
                     <button class="btn add-item-btn" data-toggle="modal" data-target="#addItemModal"  onclick="setListToAdd('inprogress')">+ Add item</button>
@@ -57,7 +57,7 @@
                 <!-- List -->
                 <div class="p-1 border list my-1">
                     <p class="text-center task-title list-title">Done</p>
-                    <div class="p-1 custom-scroll">
+                    <div class="p-1 custom-scroll" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(3)">
                         <!-- Task -->
                     </div>
                     <button class="btn add-item-btn" data-toggle="modal" data-target="#addItemModal"  onclick="setListToAdd('done')">+ Add item</button>
